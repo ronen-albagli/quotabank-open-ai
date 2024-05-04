@@ -38,5 +38,4 @@ func CreateTranslationHandler(c *gin.Context) {
 
 	fmt.Println(translateResponse)
 	c.JSON(http.StatusCreated, TranslationResponse{Translation: translateResponse})
-
 }

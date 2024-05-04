@@ -45,12 +45,12 @@ func Translate(wordToTranslate string) (string, error) {
 
 	useResponse, err := quotaBankApi.Use(useRequest)
 
-	fmt.Println(useResponse)
-
 	if err != nil {
 		fmt.Println("Error translating:", err)
 		return "", err
 	}
+
+	fmt.Println("QuotaBank usage response:", useResponse)
 
 	return translation.Choices[0].Message.Content, err
 }

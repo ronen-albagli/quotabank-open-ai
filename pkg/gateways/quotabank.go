@@ -39,13 +39,6 @@ func NewQuotaError(message string) *QuotaError {
 	return &QuotaError{message: message}
 }
 
-func NewQuotaBankClient(baseURL string, apiKey string) *QuotaBankClient {
-	return &QuotaBankClient{
-		baseURL: baseURL,
-		apiKey:  apiKey,
-	}
-}
-
 type BalanceQuota struct {
 	Total      int64 `json:"total" bson:"total"`
 	Used       int64 `json:"used" bson:"used"`
@@ -54,6 +47,13 @@ type BalanceQuota struct {
 
 type CardBalanceResponse struct {
 	Balance BalanceQuota `json:"balance"`
+}
+
+func NewQuotaBankClient(baseURL string, apiKey string) *QuotaBankClient {
+	return &QuotaBankClient{
+		baseURL: baseURL,
+		apiKey:  apiKey,
+	}
 }
 
 func (c *QuotaBankClient) Use(reqBody UseRequest) (*UseResponse, error) {
@@ -73,7 +73,6 @@ func (c *QuotaBankClient) Use(reqBody UseRequest) (*UseResponse, error) {
 	}
 	defer res.Body.Close()
 
-	// Parse response body
 	var responseBody UseResponse
 	if err := json.NewDecoder(res.Body).Decode(&responseBody); err != nil {
 		return nil, err

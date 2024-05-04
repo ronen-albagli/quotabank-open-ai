@@ -33,8 +33,8 @@ type UsageStats struct {
 	TotalTokens      int `json:"total_tokens"`
 }
 
+// Openai response mock
 func convert() (ChatCompletion, error) {
-	// Example JSON response
 	jsonData := `{
 		"id": "chatcmpl-123",
 		"object": "chat.completion",

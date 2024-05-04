@@ -54,15 +54,11 @@ func (c *TurboClient) GenerateCompletion(messages []Message, model string, maxTo
 		MaxTokens: maxTokens,
 	}
 	resp, err := c.sendRequest("POST", "/chat/completions", requestBody)
-	// if err != nil {
-	// 	return nil, err
-	// }
+
 	defer resp.Body.Close()
 	var responseBody ResponseBody
 	err = json.NewDecoder(resp.Body).Decode(&responseBody)
-	// if err != nil {
-	// 	return , err
-	// }
+
 	var completions []string
 	for _, choice := range responseBody.Choices {
 		completions = append(completions, choice.Text)
